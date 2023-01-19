@@ -27,8 +27,13 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	class AGunActor* GunSPawn;
 	void MoveForward(float val);
 	void MoveRight(float val);
 	void LookUp(float val);
 	void LookRight(float val);
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AGunActor> GunBPClass;
+
 };
