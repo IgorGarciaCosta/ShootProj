@@ -34,3 +34,8 @@ void AGunActor::Tick(float DeltaTime)
 
 }
 
+void AGunActor::GunShoot()
+{
+	UE_LOG(LogTemp, Warning, TEXT("Shoot"));
+}
+

@@ -40,6 +40,9 @@ void AShootingCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAxis(TEXT("LookUp"), this, &AShootingCharacter::LookUp);
 	PlayerInputComponent->BindAxis(TEXT("LookRight"), this, &AShootingCharacter::LookRight);
 	PlayerInputComponent->BindAction(TEXT("Jump"),EInputEvent::IE_Pressed, this, &ACharacter::Jump);
+
+	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShootingCharacter::Shoot);
+
 }
 
 void AShootingCharacter::MoveForward(float val)
@@ -61,5 +64,12 @@ void AShootingCharacter::LookUp(float val)
 void AShootingCharacter::LookRight(float val)
 {
 	AddControllerYawInput(val);
+}
+
+void AShootingCharacter::Shoot()
+{
+	if (IsValid(GunSPawn)) {
+		GunSPawn->GunShoot();
+	}
 }
 

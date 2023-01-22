@@ -30,4 +30,8 @@ private:
 	UPROPERTY(EditAnywhere)
 	class USkeletalMeshComponent* Gun;
 
+
+public:
+	static void GunShoot();
+
 };
