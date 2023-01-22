@@ -25,6 +25,9 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere)
+		class USceneComponent* RootComp;
+
+	UPROPERTY(EditAnywhere)
 	class USkeletalMeshComponent* Gun;
 
 };

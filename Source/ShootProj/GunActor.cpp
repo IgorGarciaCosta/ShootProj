@@ -3,16 +3,19 @@
 
 #include "GunActor.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Components/SceneComponent.h"
 
 // Sets default values
 AGunActor::AGunActor()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	RootComp = CreateDefaultSubobject<USceneComponent>("RootComp");
+	SetRootComponent(RootComp);
 
 	Gun = CreateDefaultSubobject<USkeletalMeshComponent>("Gun");
-
-
+	Gun->SetupAttachment(RootComp);
+	
 
 
 }

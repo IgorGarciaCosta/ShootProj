@@ -17,7 +17,9 @@ void AShootingCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	GunSPawn = GetWorld()->SpawnActor<AGunActor>(GunBPClass);
-	
+	GunSPawn->AttachToComponent(GetMesh(),FAttachmentTransformRules::KeepRelativeTransform, "GunSocket_r");
+
+
 }
 
 // Called every frame
