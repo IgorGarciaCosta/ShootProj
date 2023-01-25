@@ -4,6 +4,7 @@
 #include "GunActor.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SceneComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AGunActor::AGunActor()
@@ -37,5 +38,6 @@ void AGunActor::Tick(float DeltaTime)
 void AGunActor::GunShoot()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Shoot"));
+	//UGameplayStatics::SpawnEmitterAttached(GunParticleEffect, Gun, TEXT("b_gun_muzzleflash"));
 }
 

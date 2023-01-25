@@ -70,6 +70,7 @@ void AShootingCharacter::Shoot()
 {
 	if (IsValid(GunSPawn)) {
 		GunSPawn->GunShoot();
+		GunSPawn->PlayParticles();
 	}
 }
 

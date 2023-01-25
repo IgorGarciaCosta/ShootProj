@@ -27,11 +27,19 @@ private:
 	UPROPERTY(EditAnywhere)
 		class USceneComponent* RootComp;
 
-	UPROPERTY(EditAnywhere)
-	class USkeletalMeshComponent* Gun;
+	
 
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class  USkeletalMeshComponent* Gun;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UParticleSystem* GunParticleEffect;
+
+	UFUNCTION(BlueprintCallable)
 	static void GunShoot();
 
+	UFUNCTION(BlueprintImplementableEvent)
+	void PlayParticles();
 };
