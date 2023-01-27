@@ -38,8 +38,11 @@ public:
 		class UParticleSystem* GunParticleEffect;
 
 	UFUNCTION(BlueprintCallable)
-	static void GunShoot();
+	void GunShoot();
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayParticles();
+
+	UPROPERTY(EditAnywhere)
+		float EndLocation = 1000.f;
 };

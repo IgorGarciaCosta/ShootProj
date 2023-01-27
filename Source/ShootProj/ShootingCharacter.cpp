@@ -26,6 +26,7 @@ void AShootingCharacter::BeginPlay()
 // Called every frame
 void AShootingCharacter::Tick(float DeltaTime)
 {
+
 	Super::Tick(DeltaTime);
 
 }
