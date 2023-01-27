@@ -26,6 +26,17 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+
+	void TakeDamageFromShoot(float RecDamage);
+
+	float ReceivedDamage = 10.f;
+
+	UPROPERTY(EditAnywhere)
+	float MaxHealth = 100.f;
+
+	UPROPERTY(EditAnywhere)
+	float CurrentHealth = MaxHealth;
+
 private:
 	class AGunActor* GunSPawn;
 	void MoveForward(float val);

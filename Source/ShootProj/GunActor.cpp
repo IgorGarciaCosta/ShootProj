@@ -5,6 +5,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "Components/SceneComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "ShootingCharacter.h"
 #include "DrawDebugHelpers.h"
 
 // Sets default values
@@ -56,12 +57,20 @@ void AGunActor::GunShoot()
 
 	FHitResult HitLocation;
 
-	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
+	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location+40.f, End, ECollisionChannel::ECC_GameTraceChannel1);
 
 	if (bDone) {
 		FVector ShotDirection = -Rotation.Vector();
 		//DrawDebugPoint(GetWorld(), HitLocation.Location, 30.f, FColor::Green, true);
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticleEffect, HitLocation.Location, ShotDirection.Rotation(), true);
+	
+
+		AShootingCharacter* HitActor = Cast<AShootingCharacter>(HitLocation.GetActor());
+
+		if (HitActor != nullptr) {
+			HitActor->TakeDamageFromShoot(10.f);
+		}
+
 	}
 }
 

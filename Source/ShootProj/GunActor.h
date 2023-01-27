@@ -47,4 +47,6 @@ public:
 
 	UPROPERTY(EditAnywhere)
 		float EndLocation = 1000.f;
+
+	
 };

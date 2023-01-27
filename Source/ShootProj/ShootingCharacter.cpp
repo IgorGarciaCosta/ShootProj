@@ -46,6 +46,20 @@ void AShootingCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 }
 
+void AShootingCharacter::TakeDamageFromShoot(float RecDamage)
+{
+
+	if (CurrentHealth > 0) {
+		CurrentHealth -= RecDamage;
+		UE_LOG(LogTemp, Log, TEXT("CurrentHealth? %f"), CurrentHealth);
+	}
+
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Died"));
+	}
+
+}
+
 void AShootingCharacter::MoveForward(float val)
 {
 	AddMovementInput(GetActorForwardVector(), val, IsMoveInputIgnored());
