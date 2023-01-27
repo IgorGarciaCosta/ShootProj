@@ -36,6 +36,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UParticleSystem* GunParticleEffect;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UParticleSystem* HitParticleEffect;
 
 	UFUNCTION(BlueprintCallable)
 	void GunShoot();

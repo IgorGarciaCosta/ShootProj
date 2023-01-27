@@ -59,7 +59,9 @@ void AGunActor::GunShoot()
 	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
 
 	if (bDone) {
-		DrawDebugPoint(GetWorld(), HitLocation.Location, 30.f, FColor::Green, true);
+		FVector ShotDirection = -Rotation.Vector();
+		//DrawDebugPoint(GetWorld(), HitLocation.Location, 30.f, FColor::Green, true);
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticleEffect, HitLocation.Location, ShotDirection.Rotation(), true);
 	}
 }
 
