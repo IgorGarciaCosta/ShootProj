@@ -56,6 +56,7 @@ void AShootingCharacter::TakeDamageFromShoot(float RecDamage)
 
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Died"));
+		IsDead();
 	}
 
 }
@@ -79,6 +80,11 @@ void AShootingCharacter::LookUp(float val)
 void AShootingCharacter::LookRight(float val)
 {
 	AddControllerYawInput(val);
+}
+
+bool AShootingCharacter::IsDead() const
+{
+	return CurrentHealth <= 0;
 }
 
 void AShootingCharacter::Shoot()
