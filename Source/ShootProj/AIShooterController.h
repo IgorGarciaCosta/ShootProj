@@ -17,5 +17,7 @@ class SHOOTPROJ_API AAIShooterController : public AAIController
 
 protected:
 	virtual void BeginPlay() override;
+
+	virtual void Tick(float DeltaSeconds) override;
 	
 };
