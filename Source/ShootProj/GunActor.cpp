@@ -74,3 +74,8 @@ void AGunActor::GunShoot()
 	}
 }
 
+void AGunActor::DestroyGun()
+{
+	Destroy();
+}
+

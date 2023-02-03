@@ -3,6 +3,7 @@
 
 #include "ShootingCharacter.h"
 #include "GunActor.h"
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values
 AShootingCharacter::AShootingCharacter()
@@ -28,6 +29,13 @@ void AShootingCharacter::Tick(float DeltaTime)
 {
 
 	Super::Tick(DeltaTime);
+
+	if (CurrentHealth <= 0) {
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), DeathEffect, GetTransform());
+		GunSPawn->DestroyGun();
+		Destroy();
+		
+	}
 
 }
 

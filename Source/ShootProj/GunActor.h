@@ -42,6 +42,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void GunShoot();
 
+	void DestroyGun();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void PlayParticles();
 

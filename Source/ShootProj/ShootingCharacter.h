@@ -46,9 +46,10 @@ private:
 	void MoveRight(float val);
 	void LookUp(float val);
 	void LookRight(float val);
-
 	
-
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UParticleSystem* DeathEffect;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGunActor> GunBPClass;
 
