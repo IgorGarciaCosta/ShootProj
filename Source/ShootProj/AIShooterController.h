@@ -19,5 +19,9 @@ protected:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
+
+private:
+	UPROPERTY(EditAnywhere)
+	class UBehaviorTree* AIBehaviorTree;
 	
 };
