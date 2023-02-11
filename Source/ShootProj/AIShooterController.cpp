@@ -14,10 +14,8 @@ void AAIShooterController::BeginPlay()
 	if (AIBehaviorTree != nullptr) {
 		RunBehaviorTree(AIBehaviorTree);
 	}
-
-	GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLoc"), PlayerPawn->GetActorLocation());
-	
 	GetBlackboardComponent()->SetValueAsVector(TEXT("PawnLocation"), GetPawn()->GetActorLocation());
+
 }
 
 void AAIShooterController::Tick(float DeltaSeconds)
@@ -27,6 +25,17 @@ void AAIShooterController::Tick(float DeltaSeconds)
 	APawn* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
 
 	bool IsIsLineOfSightTo = LineOfSightTo(PlayerPawn);
+
+	if (IsIsLineOfSightTo) {
+		GetBlackboardComponent()->SetValueAsVector(TEXT("PlayerLoc"), PlayerPawn->GetActorLocation());
+
+
+	}
+	else {
+		GetBlackboardComponent()->ClearValue(TEXT("PlayerLoc"));
+	}
+
+
 	/*if (IsIsLineOfSightTo) {
 		MoveToActor(PlayerPawn, 150.f);
 		SetFocus(PlayerPawn);
