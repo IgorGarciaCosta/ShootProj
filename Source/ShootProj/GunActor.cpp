@@ -57,7 +57,11 @@ void AGunActor::GunShoot()
 
 	FHitResult HitLocation;
 
-	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location+40.f, End, ECollisionChannel::ECC_GameTraceChannel1);
+	FCollisionQueryParams Params;
+	Params.AddIgnoredActor(this);
+	Params.AddIgnoredActor(GetOwner());
+
+	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location+40.f, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
 
 	if (bDone) {
 		FVector ShotDirection = -Rotation.Vector();
