@@ -50,5 +50,11 @@ public:
 	UPROPERTY(EditAnywhere)
 		float EndLocation = 1000.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USoundBase* MuzzleSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		USoundBase* ImpactSound;
+
 	
 };

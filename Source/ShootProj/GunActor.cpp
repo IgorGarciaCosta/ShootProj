@@ -41,6 +41,7 @@ void AGunActor::GunShoot()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Shoot"));
 	//UGameplayStatics::SpawnEmitterAttached(GunParticleEffect, Gun, TEXT("b_gun_muzzleflash"));
+	UGameplayStatics::SpawnSoundAttached(MuzzleSound, Gun, TEXT("MuzzleFlash"));
 	APawn* OwnerPawn = Cast<APawn>(GetOwner());
 	
 	if (OwnerPawn == nullptr)return;
@@ -64,6 +65,7 @@ void AGunActor::GunShoot()
 	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location+40.f, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
 
 	if (bDone) {
+		UGameplayStatics::SpawnSoundAtLocation(this, ImpactSound, HitLocation.Location);
 		FVector ShotDirection = -Rotation.Vector();
 		//DrawDebugPoint(GetWorld(), HitLocation.Location, 30.f, FColor::Green, true);
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticleEffect, HitLocation.Location, ShotDirection.Rotation(), true);
