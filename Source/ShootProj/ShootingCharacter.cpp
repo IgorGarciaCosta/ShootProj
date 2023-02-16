@@ -4,6 +4,7 @@
 #include "ShootingCharacter.h"
 #include "GunActor.h"
 #include "Kismet/GameplayStatics.h"
+#include "ShootProjGameModeBase.h"
 
 // Sets default values
 AShootingCharacter::AShootingCharacter()
@@ -65,6 +66,16 @@ void AShootingCharacter::TakeDamageFromShoot(float RecDamage)
 	else {
 		UE_LOG(LogTemp, Warning, TEXT("Died"));
 		IsDead();
+	}
+
+	if (IsDead()) {
+		AShootProjGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AShootProjGameModeBase>();
+		
+		if (GameMode != nullptr) {
+			//UE_LOG(LogTemp, Warning, TEXT("char shoot to kill"));
+			GameMode->PawnKilled(this);
+		}
+		
 	}
 
 }

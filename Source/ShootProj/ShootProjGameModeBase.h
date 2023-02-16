@@ -13,5 +13,8 @@ UCLASS()
 class SHOOTPROJ_API AShootProjGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	virtual void PawnKilled(APawn* PawnKilled);
 	
 };
