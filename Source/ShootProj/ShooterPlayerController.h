@@ -17,5 +17,9 @@ class SHOOTPROJ_API AShooterPlayerController : public APlayerController
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
 
-	
+private:
+	//widgets
+
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UUserWidget>WBPLoseScreen;
 };
