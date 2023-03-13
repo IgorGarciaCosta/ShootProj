@@ -53,6 +53,8 @@ public:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGunActor> GunBPClass;
 
+
+
 	void Shoot();
 
 };

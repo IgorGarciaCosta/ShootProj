@@ -16,10 +16,16 @@ class SHOOTPROJ_API AShooterPlayerController : public APlayerController
 
 public:
 	virtual void GameHasEnded(class AActor* EndGameFocus = nullptr, bool bIsWinner = false) override;
-
+	
+protected:
+	virtual void BeginPlay() override;
 private:
 	//widgets
 
 	UPROPERTY(EditAnywhere)
 		TSubclassOf<class UUserWidget>WBPLoseScreen;
+	UPROPERTY(EditAnywhere)
+		TSubclassOf<class UUserWidget>HUDBP;
+
+	class UUserWidget* HUD;
 };
