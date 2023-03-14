@@ -40,6 +40,10 @@ public:
 	UFUNCTION(BlueprintPure)
 		bool IsDead() const;
 
+
+	UFUNCTION(BlueprintPure)
+		float GetHealthPercent() const;
+
 private:
 	class AGunActor* GunSPawn;
 	void MoveForward(float val);

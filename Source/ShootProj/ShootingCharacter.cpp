@@ -106,6 +106,11 @@ bool AShootingCharacter::IsDead() const
 	return CurrentHealth <= 0;
 }
 
+float AShootingCharacter::GetHealthPercent() const
+{
+	return CurrentHealth / MaxHealth;
+}
+
 void AShootingCharacter::Shoot()
 {
 	if (IsValid(GunSPawn)) {
