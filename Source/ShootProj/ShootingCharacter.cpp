@@ -5,12 +5,26 @@
 #include "GunActor.h"
 #include "Kismet/GameplayStatics.h"
 #include "ShootProjGameModeBase.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
+
 
 // Sets default values
 AShootingCharacter::AShootingCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
+	CameraBoom->SetupAttachment(GetRootComponent());
+	CameraBoom->TargetArmLength = 400.f;
+	CameraBoom->bUsePawnControlRotation = true;
+
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
+	FollowCamera->bUsePawnControlRotation = false;
+
+
 
 }
 
@@ -52,6 +66,8 @@ void AShootingCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAction(TEXT("Jump"),EInputEvent::IE_Pressed, this, &ACharacter::Jump);
 
 	PlayerInputComponent->BindAction(TEXT("Shoot"), EInputEvent::IE_Pressed, this, &AShootingCharacter::Shoot);
+	PlayerInputComponent->BindAction(TEXT("ZoomCamera"), EInputEvent::IE_Pressed, this, &AShootingCharacter::ZoomIn);
+	PlayerInputComponent->BindAction(TEXT("ZoomCamera"), EInputEvent::IE_Released, this, &AShootingCharacter::ZoomOut);
 
 }
 
@@ -99,6 +115,16 @@ void AShootingCharacter::LookUp(float val)
 void AShootingCharacter::LookRight(float val)
 {
 	AddControllerYawInput(val);
+}
+
+void AShootingCharacter::ZoomIn()
+{
+	FollowCamera->SetFieldOfView(45.f);
+}
+
+void AShootingCharacter::ZoomOut()
+{
+	FollowCamera->SetFieldOfView(90.f);
 }
 
 bool AShootingCharacter::IsDead() const

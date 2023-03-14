@@ -50,12 +50,21 @@ private:
 	void MoveRight(float val);
 	void LookUp(float val);
 	void LookRight(float val);
+	void ZoomIn();
+	void ZoomOut();
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class UParticleSystem* DeathEffect;
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AGunActor> GunBPClass;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class USpringArmComponent* CameraBoom;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+		class UCameraComponent* FollowCamera;
+
 
 
 
