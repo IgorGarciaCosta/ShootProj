@@ -4,6 +4,7 @@
 #include "AIPeopleCharacter.h"
 #include "ShootProjGameModeBase.h"
 #include "Components/CapsuleComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 
 // Sets default values
 AAIPeopleCharacter::AAIPeopleCharacter()
@@ -39,16 +40,19 @@ void AAIPeopleCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 
 void AAIPeopleCharacter::TakeDamageFromShoot(float RecDamage)
 {
-	UE_LOG(LogTemp, Warning, TEXT("called"));
+	//UE_LOG(LogTemp, Warning, TEXT("called"));
 	if (CurHealth > 0) {
 		CurHealth -= RecDamage;
-		UE_LOG(LogTemp, Log, TEXT("CurrentHealth: %f"), CurHealth);
+		//UE_LOG(LogTemp, Log, TEXT("CurrentHealth: %f"), CurHealth);
 	}
 
 	else {
-		UE_LOG(LogTemp, Warning, TEXT("Died"));
+		//UE_LOG(LogTemp, Warning, TEXT("Died"));
 		IsDead();
 	}
+
+	UCharacterMovementComponent* Movement = GetCharacterMovement();
+	Movement->MaxWalkSpeed = 300.f;
 
 	if (IsDead()) {
 		AShootProjGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AShootProjGameModeBase>();
