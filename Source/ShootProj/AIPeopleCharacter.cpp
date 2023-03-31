@@ -2,6 +2,8 @@
 
 
 #include "AIPeopleCharacter.h"
+#include "ShootProjGameModeBase.h"
+#include "Components/CapsuleComponent.h"
 
 // Sets default values
 AAIPeopleCharacter::AAIPeopleCharacter()
@@ -15,14 +17,17 @@ AAIPeopleCharacter::AAIPeopleCharacter()
 void AAIPeopleCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CurHealth = MaxHealth;
 }
 
 // Called every frame
 void AAIPeopleCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	if (IsDead()) {
+		DetachFromControllerPendingDestroy();
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	}
 }
 
 // Called to bind functionality to input
@@ -30,5 +35,34 @@ void AAIPeopleCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputC
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AAIPeopleCharacter::TakeDamageFromShoot(float RecDamage)
+{
+	UE_LOG(LogTemp, Warning, TEXT("called"));
+	if (CurHealth > 0) {
+		CurHealth -= RecDamage;
+		UE_LOG(LogTemp, Log, TEXT("CurrentHealth: %f"), CurHealth);
+	}
+
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Died"));
+		IsDead();
+	}
+
+	if (IsDead()) {
+		AShootProjGameModeBase* GameMode = GetWorld()->GetAuthGameMode<AShootProjGameModeBase>();
+
+		if (GameMode != nullptr) {
+			//UE_LOG(LogTemp, Warning, TEXT("char shoot to kill"));
+			GameMode->PawnKilled(this);
+		}
+
+	}
+}
+
+bool AAIPeopleCharacter::IsDead() const
+{
+	return CurHealth<=0.f;
 }
 

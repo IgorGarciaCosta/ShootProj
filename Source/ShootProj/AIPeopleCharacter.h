@@ -26,4 +26,11 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void TakeDamageFromShoot(float RecDamage);
+
+	UFUNCTION(BlueprintPure)
+		bool IsDead() const;
+private:
+	float MaxHealth = 200.f;
+	float CurHealth;
 };

@@ -7,6 +7,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "ShootingCharacter.h"
 #include "DrawDebugHelpers.h"
+#include "AIPeopleCharacter.h"
 
 // Sets default values
 AGunActor::AGunActor()
@@ -72,10 +73,18 @@ void AGunActor::GunShoot()
 	
 
 		AShootingCharacter* HitActor = Cast<AShootingCharacter>(HitLocation.GetActor());
+		
 
 		if (HitActor != nullptr) {
 			HitActor->TakeDamageFromShoot(10.f);
 		}
+		else {
+			AAIPeopleCharacter* AIPeople = Cast<AAIPeopleCharacter>(HitLocation.GetActor());
+			if (AIPeople != nullptr) {
+				AIPeople->TakeDamageFromShoot(10.f);
+			}
+		}
+			
 
 	}
 }
