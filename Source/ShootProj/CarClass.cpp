@@ -3,6 +3,10 @@
 
 #include "CarClass.h"
 #include "Kismet/GameplayStatics.h"
+#include "ShootProjGameModeBase.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "Particles/ParticleSystem.h"
 
 // Sets default values
 ACarClass::ACarClass()
@@ -24,6 +28,15 @@ void ACarClass::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (CurHealth <= 60) {
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), CarDamageEmitter, GetActorLocation());
+
+	}
+	if (IsDead()) {
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), CarEmitter, GetActorLocation());
+		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), CarExplosionSound, GetActorLocation());
+		Destroy();
+	}
 }
 
 // Called to bind functionality to input
@@ -35,6 +48,26 @@ void ACarClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	PlayerInputComponent->BindAxis(TEXT("CarTurn"), this, &ACarClass::Turn);
 	//PlayerInputComponent->BindAxis(TEXT("RollControl"), this, &ACarClass::RollControl);
 
+}
+
+void ACarClass::TakeDamage(float RecDamage)
+{
+	//UE_LOG(LogTemp, Warning, TEXT("called"));
+	if (CurHealth > 0) {
+		CurHealth -= RecDamage;
+		//UE_LOG(LogTemp, Log, TEXT("CurrentHealth: %f"), CurHealth);
+	}
+
+	else {
+		//UE_LOG(LogTemp, Warning, TEXT("Died"));
+		IsDead();
+	}
+
+}
+
+bool ACarClass::IsDead() const
+{
+	return CurHealth <= 0.f;
 }
 
 void ACarClass::Move(float MoveValue)

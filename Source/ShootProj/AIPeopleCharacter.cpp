@@ -6,6 +6,7 @@
 #include "Components/CapsuleComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
+
 // Sets default values
 AAIPeopleCharacter::AAIPeopleCharacter()
 {

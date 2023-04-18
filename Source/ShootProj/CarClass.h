@@ -26,10 +26,29 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void TakeDamage(float RecDamage);
+
+	UFUNCTION(BlueprintPure)
+		bool IsDead() const;
+
 	void Move(float MoveValue);
 	void Turn(float TurnValue);
 	//void RollControl(float roll);
 
 	float CarSpeed = 600.f;
 	float CarTurnRate = 45.f;
+
+private:
+	float MaxHealth = 200.f;
+	float CurHealth = MaxHealth;
+
+public:
+	//emitters
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UParticleSystem* CarEmitter;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class UParticleSystem* CarDamageEmitter;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		class USoundBase* CarExplosionSound;
 };
