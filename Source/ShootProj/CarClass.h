@@ -26,4 +26,10 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	void Move(float MoveValue);
+	void Turn(float TurnValue);
+	//void RollControl(float roll);
+
+	float CarSpeed = 600.f;
+	float CarTurnRate = 45.f;
 };
