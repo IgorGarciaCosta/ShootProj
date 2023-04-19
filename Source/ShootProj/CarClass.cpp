@@ -7,6 +7,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystem.h"
+#include "OldCarActorClass.h"
 
 // Sets default values
 ACarClass::ACarClass()
@@ -35,6 +36,9 @@ void ACarClass::Tick(float DeltaTime)
 	if (IsDead()) {
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), CarEmitter, GetActorLocation());
 		UGameplayStatics::SpawnSoundAtLocation(GetWorld(), CarExplosionSound, GetActorLocation());
+		
+		SpawnOldCar = GetWorld()->SpawnActor<AOldCarActorClass>(OldCarBP);
+		SpawnOldCar->SetActorLocation(GetActorLocation());
 		Destroy();
 	}
 }

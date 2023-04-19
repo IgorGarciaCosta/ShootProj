@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "CarClass.generated.h"
 
+class AOldCarActorClass;
+
 UCLASS()
 class SHOOTPROJ_API ACarClass : public ACharacter
 {
@@ -51,4 +53,10 @@ public:
 		class UParticleSystem* CarDamageEmitter;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		class USoundBase* CarExplosionSound;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		TSubclassOf<AOldCarActorClass> OldCarBP;
+
+	class AOldCarActorClass* SpawnOldCar;
+
 };
