@@ -50,8 +50,9 @@ void ACarClass::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
-void ACarClass::TakeDamage(float RecDamage)
+void ACarClass::TakeDamageFromShoot(float RecDamage)
 {
+	UE_LOG(LogTemp, Warning, TEXT("CurrentCarHealth: %f"), CurHealth);
 	//UE_LOG(LogTemp, Warning, TEXT("called"));
 	if (CurHealth > 0) {
 		CurHealth -= RecDamage;

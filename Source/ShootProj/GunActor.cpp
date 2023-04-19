@@ -8,6 +8,7 @@
 #include "ShootingCharacter.h"
 #include "DrawDebugHelpers.h"
 #include "AIPeopleCharacter.h"
+#include "CarClass.h"
 
 // Sets default values
 AGunActor::AGunActor()
@@ -55,7 +56,7 @@ void AGunActor::GunShoot()
 	FRotator Rotation;
 	OwnerController->GetPlayerViewPoint(Location, Rotation);
 
-	FVector End = Location + Rotation.Vector() * 1000.f;
+	FVector End = Location + Rotation.Vector() * 10000.f;
 
 	FHitResult HitLocation;
 
@@ -72,9 +73,8 @@ void AGunActor::GunShoot()
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticleEffect, HitLocation.Location, ShotDirection.Rotation(), true);
 	
 
-		AShootingCharacter* HitActor = Cast<AShootingCharacter>(HitLocation.GetActor());
-		
 
+		AShootingCharacter* HitActor = Cast<AShootingCharacter>(HitLocation.GetActor());
 		if (HitActor != nullptr) {
 			HitActor->TakeDamageFromShoot(10.f);
 		}
@@ -82,6 +82,14 @@ void AGunActor::GunShoot()
 			AAIPeopleCharacter* AIPeople = Cast<AAIPeopleCharacter>(HitLocation.GetActor());
 			if (AIPeople != nullptr) {
 				AIPeople->TakeDamageFromShoot(10.f);
+			}
+
+			else {
+				
+				ACarClass* AICar = Cast<ACarClass>(HitLocation.GetActor());
+				if (AICar != nullptr) {
+					AICar->TakeDamageFromShoot(10.f);
+				}
 			}
 		}
 			
