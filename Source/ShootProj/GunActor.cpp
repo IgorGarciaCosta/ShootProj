@@ -64,31 +64,33 @@ void AGunActor::GunShoot()
 	Params.AddIgnoredActor(this);
 	Params.AddIgnoredActor(GetOwner());
 
-	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location+40.f, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
+	bool bDone = GetWorld()->LineTraceSingleByChannel(HitLocation, Location, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
 
 	if (bDone) {
 		UGameplayStatics::SpawnSoundAtLocation(this, ImpactSound, HitLocation.Location);
 		FVector ShotDirection = -Rotation.Vector();
 		//DrawDebugPoint(GetWorld(), HitLocation.Location, 30.f, FColor::Green, true);
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), HitParticleEffect, HitLocation.Location, ShotDirection.Rotation(), true);
-	
+		//DrawDebugLine(GetWorld(), GetActorLocation(), HitLocation.Location, FColor::Red, true);
 
 
 		AShootingCharacter* HitActor = Cast<AShootingCharacter>(HitLocation.GetActor());
 		if (HitActor != nullptr) {
-			HitActor->TakeDamageFromShoot(10.f);
+			HitActor->TakeDamageFromShoot(GunDamage);
+			UE_LOG(LogTemp, Warning, TEXT("Hit main"));
+			
 		}
 		else {
 			AAIPeopleCharacter* AIPeople = Cast<AAIPeopleCharacter>(HitLocation.GetActor());
 			if (AIPeople != nullptr) {
-				AIPeople->TakeDamageFromShoot(10.f);
+				AIPeople->TakeDamageFromShoot(GunDamage);
 			}
 
 			else {
 				
 				ACarClass* AICar = Cast<ACarClass>(HitLocation.GetActor());
 				if (AICar != nullptr) {
-					AICar->TakeDamageFromShoot(10.f);
+					AICar->TakeDamageFromShoot(GunDamage);
 				}
 			}
 		}

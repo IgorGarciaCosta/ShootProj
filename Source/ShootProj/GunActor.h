@@ -54,6 +54,9 @@ public:
 		USoundBase* MuzzleSound;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+		float GunDamage = 10.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		USoundBase* ImpactSound;
 
 	
